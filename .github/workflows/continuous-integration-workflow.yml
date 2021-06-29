@@ -7,4 +7,12 @@ jobs:
     runs-on: ubuntu-latest      # Sets the build environment a machine with the latest Ubuntu installed
     steps:
     - uses: actions/checkout@v2 # Adds a step to checkout the repository code
-
+    - uses: actions/setup-dotnet@v1  # Setup .NET CLI
+      with: 
+        dotnet-version: '5.0.x'
+    # Build the C# code.
+    - run: dotnet build
+    # Run the C# tests.
+    # Build the TypeScript code.
+    # Run the linter on the TypeScript code.
+    # Run the TypeScript tests.
