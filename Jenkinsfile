@@ -60,6 +60,11 @@ pipeline {
 		}
 	    }
 	}
+        post {
+	   always {
+	       publishCoverage adapters: [istanbulCoberturaAdapter('DotnetTemplate.Web/coverage/cobertura-coverage.xml')], sourceFileResolver: sourceFiles('NEVER_STORE')
+	   }
+	}
     }
 
 }
