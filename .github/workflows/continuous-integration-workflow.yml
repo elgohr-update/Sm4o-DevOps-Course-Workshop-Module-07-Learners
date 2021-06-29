@@ -11,27 +11,19 @@ jobs:
       with: 
         dotnet-version: '5.0.x'
     # Build the C# code.
-    - run: dotnetttt build
+    - run: dotnet build
     # Run the C# tests.
-    #- run: dotnet test
+    - run: dotnet test
     # Build the TypeScript code.
-    #- run: npm install && npm run build
-    #  working-directory: ./DotnetTemplate.Web
+    - run: npm install && npm run build
+      working-directory: ./DotnetTemplate.Web
     # Run the linter on the TypeScript code.
-    #- run: npm run lint
-    #  working-directory: ./DotnetTemplate.Web
+    - run: npm run lint
+      working-directory: ./DotnetTemplate.Web
     # Run the TypeScript tests.
-    #- run: npm t
-    #  working-directory: ./DotnetTemplate.Web
+    - run: npm t
+      working-directory: ./DotnetTemplate.Web
     # Send Slack Notification
-    # - name: Slack Notification 
-    #   id: slack
-    #   uses: rtCamp/action-slack-notify@v2
-    #   with:
-    #     status: ${{ job.status }}
-    #     notify_when: 'failure'
-    #   env:
-    #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
     - name: Slack Notification
       uses: ravsamhq/notify-slack-action@v1
       if: always()
