@@ -1,4 +1,5 @@
 # Workshop Module 07
+![build](https://github.com/Sm4o/DevOps-Course-Workshop-Module-07-Learners/actions/workflows/continuous-integration-workflow.yml/badge.svg)
 
 This repository is for learners on Corndel's DevOps apprenticeship.
 
