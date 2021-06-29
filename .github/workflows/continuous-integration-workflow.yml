@@ -27,5 +27,8 @@ jobs:
     - name: Slack Notification 
       id: slack
       uses: rtCamp/action-slack-notify@v2
+      with:
+        status: ${{ job.status }}
+        notify_when: 'failure'
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
