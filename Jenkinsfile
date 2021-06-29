@@ -6,7 +6,9 @@ pipeline {
 
     stages {
 	stage('Checkout source code') {
-	    checkout scm
+	    steps {
+	        checkout scm
+	    }
         }
 
 	stage('.NET Stage') {
