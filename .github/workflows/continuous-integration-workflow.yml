@@ -11,7 +11,7 @@ jobs:
       with: 
         dotnet-version: '5.0.x'
     # Build the C# code.
-    #- run: dotnet build
+    - run: dotnetttt build
     # Run the C# tests.
     #- run: dotnet test
     # Build the TypeScript code.
