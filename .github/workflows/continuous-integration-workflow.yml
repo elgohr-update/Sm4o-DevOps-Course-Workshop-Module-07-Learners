@@ -15,5 +15,11 @@ jobs:
     # Run the C# tests.
     - run: dotnet test
     # Build the TypeScript code.
+    - run: npm install && npm run build
+      working-directory: ./DotnetTemplate.Web
     # Run the linter on the TypeScript code.
+    - run: npm run lint
+      working-directory: ./DotnetTemplate.Web
     # Run the TypeScript tests.
+    - run: npm t
+      working-directory: ./DotnetTemplate.Web
