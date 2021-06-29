@@ -24,8 +24,8 @@ jobs:
     #- run: npm t
     #  working-directory: ./DotnetTemplate.Web
     # Send Slack Notification
-    - name: Send GitHub Action trigger data to Slack workflow
+    - name: Slack Notification 
       id: slack
-      uses: slackapi/slack-github-action@v1.14.0
+      uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
