@@ -51,10 +51,10 @@ pipeline {
 			} 
 		    }
 		}
-	 	stage('Test Typescript') {
+	 	stage('Test Typescript With Coverage') {
 		    steps {
 			dir("DotnetTemplate.Web") {
-		 	    sh 'npm t'
+		 	    sh 'npm run test-with-coverage'
 			} 
 		    }
 		}
