@@ -55,16 +55,11 @@ pipeline {
 		    steps {
 			dir("DotnetTemplate.Web") {
 		 	    sh 'npm run test-with-coverage'
-			    publishCoverage adapters: [istanbulCoberturaAdapter('coverage/cobertura-coverage.xml')], sourceFileResolver: sourceFiles('NEVER_STORE')
+			    publishCoverage adapters: [istanbulCoberturaAdapter(path: 'coverage/cobertura-coverage.xml', thresholds: [[failUnhealthy: true, thresholdTarget: 'Aggregated Report', unhealthyThreshold: 90.0]])], sourceFileResolver: sourceFiles('NEVER_STORE')
 			} 
 		    }
 		}
 	    }
 	}
     }
-    // post {
-    //    always {
-    //        publishCoverage adapters: [istanbulCoberturaAdapter('DotnetTemplate.Web/coverage/cobertura-coverage.xml')], sourceFileResolver: sourceFiles('NEVER_STORE')
-    //    }
-    // }
 }
