@@ -62,6 +62,7 @@ jobs:
     runs-on: ubuntu-latest      # Sets the build environment a machine with the latest Ubuntu installed
     needs: build  # Important so github actions waits on build & test stages to pass
     steps:
+      - uses: actions/checkout@v2 # Adds a step to checkout the repository code
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
