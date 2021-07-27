@@ -76,3 +76,5 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "corndel-dotnet-app-sam" # Must be unique in Heroku
           heroku_email: "samuil.plamenov@harpercollins.co.uk"
+          usedocker: true
+          justlogin: true
