@@ -31,6 +31,13 @@ jobs:
     # Run the TypeScript tests.
     - run: npm t
       working-directory: ./DotnetTemplate.Web
+    # Push image to Docker Hub
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: sm4o/dotnettemplate
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
     # Send Slack Notification
     - name: Slack Notification
       uses: ravsamhq/notify-slack-action@v1
@@ -39,4 +46,3 @@ jobs:
         status: ${{ job.status }} 
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} 
-
