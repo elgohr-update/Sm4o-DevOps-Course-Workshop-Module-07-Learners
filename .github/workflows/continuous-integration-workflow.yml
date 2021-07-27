@@ -1,0 +1,67 @@
+name: Continuous Integration
+on: 
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest      # Sets the build environment a machine with the latest Ubuntu installed
+    steps:
+    - uses: actions/checkout@v2 # Adds a step to checkout the repository code
+    - uses: actions/setup-dotnet@v1  # Setup .NET CLI
+      with: 
+        dotnet-version: '5.0.x'
+    # Build the C# code.
+    - run: dotnet build
+    # Run the C# tests.
+    - run: dotnet test
+    # Build the TypeScript code.
+    - run: npm install && npm run build
+      working-directory: ./DotnetTemplate.Web
+    # Run the linter on the TypeScript code.
+    - run: npm run lint
+      working-directory: ./DotnetTemplate.Web
+    # Run the TypeScript tests.
+    - run: npm t
+      working-directory: ./DotnetTemplate.Web
+    # Push image to Docker Hub
+    #- name: Publish to Registry
+    #  uses: elgohr/Publish-Docker-Github-Action@master
+    #  with:
+    #    name: sm4o/dotnettemplate
+    #    username: ${{ secrets.DOCKER_USERNAME }}
+    #    password: ${{ secrets.DOCKER_PASSWORD }}
+    #    tags: ${{ github.head_ref }}.${{ github.sha }}
+    # Send Slack Notification
+    - name: Slack Notification
+      uses: ravsamhq/notify-slack-action@v1
+      if: always()
+      with:
+        status: ${{ job.status }} 
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} 
+  deploy:
+    name: Deploy to Docker Hub
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest      # Sets the build environment a machine with the latest Ubuntu installed
+    steps:
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: sm4o/dotnettemplate
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: ${{ github.head_ref }}.${{ github.sha }}
+      - name: Deploy to Heroku 
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: "corndel-dotnet-app-sam" # Must be unique in Heroku
+          heroku_email: "samuil.plamenov@harpercollins.co.uk"
