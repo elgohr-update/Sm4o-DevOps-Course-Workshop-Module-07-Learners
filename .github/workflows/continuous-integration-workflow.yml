@@ -34,7 +34,7 @@ jobs:
     # Push image to Docker Hub
     #- name: Publish to Registry
     #  if: ${{ github.ref == 'refs/heads/main' }}
-    #  uses: elgohr/Publish-Docker-Github-Action@master
+    #  uses: elgohr/Publish-Docker-Github-Action@v5
     #  with:
     #    name: sm4o/dotnettemplate
     #    username: ${{ secrets.DOCKER_USERNAME }}
@@ -64,7 +64,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2 # Adds a step to checkout the repository code
       - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: sm4o/dotnettemplate
           username: ${{ secrets.DOCKER_USERNAME }}
